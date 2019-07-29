@@ -1,30 +1,26 @@
 <template>
   <div>
     <!-- 轮播图 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
-        <img :src="item.img" alt />
-      </mt-swipe-item>
-    </mt-swipe>
+        <swiper :lunbotuList="lunbotuList"></swiper>
     <!-- 六宫格 -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-        <a href="#">
+        <router-link to="/home/newlist">
           <img src="../../images/menu1.png" alt="">
           <div class="mui-media-body">新闻资讯</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-        <a href="#">
+        <router-link to="/home/photolst">
           <img src="../../images/menu2.png" alt="">
           <div class="mui-media-body">图片分享</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
-        <a href="#">
+        <router-link to="/home/goodslist">
           <img src="../../images/menu3.png" alt="">
           <div class="mui-media-body">商品购买</div>
-        </a>
+        </router-link>
       </li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-4">
         <a href="#">
@@ -49,6 +45,7 @@
 </template>
 <script>
 import { Toast } from "mint-ui";
+import swiper from '../subcomponents/swiper.vue'
 export default {
   data() {
     return {
@@ -61,7 +58,7 @@ export default {
   methods: {
     getLunbotu() {
       this.$http
-        .get("http://www.liulongbin.top:3005/api/getlunbo")
+        .get("api/getlunbo")
         .then(res => {
           //   console.log(res.body)
           if (res.body.status === 0) {
@@ -72,17 +69,14 @@ export default {
           }
         });
     }
+  },
+  components:{
+    swiper
   }
 };
 </script>
 <style lang="less" scoped>
-.mint-swipe {
-  height: 200px;
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
+
 .mui-grid-view.mui-grid-9{
     background-color: #fff;
     border: 0;
